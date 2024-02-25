@@ -1,0 +1,57 @@
+/* styles/Home.css */
+
+#fullscreen-btn {
+    /* Style for the fullscreen button */
+    padding: 10px 20px;
+    margin: 10px 0;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #fullscreen-btn:hover {
+    /* Style for the fullscreen button when the mouse is over it */
+    background-color: #0056b3;
+  }
+  
+  #description, #instructions {
+    /* Style for the description and instructions divs */
+    margin: 20px 0;
+    font-size: 16px;
+  }
+  
+  #word-checker-input {
+    /* Style for the textarea */
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  #word-checker-output {
+    /* Style for the output div */
+    margin: 20px 0;
+    font-size: 16px;
+  }
+  
+  #intelligibility {
+    /* Style for the intelligibility div */
+    margin: 20px 0;
+    font-size: 16px;
+  }
+  
+  span {
+    /* Style for the span elements */
+    font-weight: bold;
+  }
+
+  /* styles/Home.css */
+
+#word-checker-output {
+    /* Existing styles here */
+  
+    /* Add this line */
+    word-wrap: break-word;
+  }
