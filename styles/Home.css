@@ -77,3 +77,54 @@ span[style="color: red"] {
   padding: 5px; /* Added padding for better visual separation */
   border-radius: 5px; /* Added border radius for rounded corners */
 }
+
+body.light {
+  background-color: white;
+  color: black;
+}
+
+body.dark {
+  background-color: black;
+  color: white;
+}
+
+body.dark {
+  background-color: #333;
+  color: #f4f4f4;
+}
+
+body.dark button {
+  background-color: #444;
+  color: #f4f4f4;
+}
+
+body.dark textarea {
+  background-color: #444;
+  color: #f4f4f4;
+  border-color: #555;
+}
+
+body.dark #word-checker-output {
+  background-color: #444;
+  color: #f4f4f4;
+  border-color: #555;
+}
+
+body.dark #intelligibility {
+  color: #f4f4f4;
+}
+
+body.dark span[style="color: green"] {
+  color: #008000;
+  background-color: #004400;
+}
+
+body.dark span[style="color: red"] {
+  color: #FF0000;
+  background-color: #660000;
+}
+
+body.dark #lp {
+  background-color: #444;
+  color: #f4f4f4;
+}
