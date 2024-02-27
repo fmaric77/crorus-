@@ -97,6 +97,7 @@ function transliterateCyrillicToLatin(word) {
 
 
 function isWordInSet(word, words) {
+  word = word.replace(/['"]/g, ''); // Remove single and double quotes from the word
   const latinWord = transliterateCyrillicToLatin(word);
 
   if (words.has(word) || words.has(latinWord)) {
@@ -124,6 +125,8 @@ function isWordInSet(word, words) {
       }
     }
   }
+
+
 
   // Check if removing the last character from the word or its transliteration results in a word that's in the set
   const wordWithoutLastChar = word.slice(0, -1);
@@ -161,6 +164,7 @@ for (let i = 0; i < vowelsadd.length; i++) {
     }
   }
 
+
   if (word.endsWith('ja') || latinWord.endsWith('ja')) {
     const wordWithoutLastJa = word.slice(0, -2);
     const latinWordWithoutLastJa = latinWord.slice(0, -2);
@@ -187,10 +191,10 @@ function isWordInFfSet(word, ffWords) {
   for (let i = 0; i < word.length; i++) {
     for (let j = i + 1; j <= word.length; j++) {
       const slice = word.slice(i, j);
-      if ((slice === 'mir' && word === 'mir') || (slice === 'pora' && word === 'pora') || (slice === 'para' && word === 'para')) {
+      if ((slice === 'mir' && word === 'mir') || (slice === 'pora' && word === 'pora') || (slice === 'para' && word === 'para') || (slice === 'obraz' && word === 'obraz')) {
         return true;
       }
-      if (slice !== 'mir' && slice !== 'pora' && slice !== 'para' && ffWords.has(slice)) {
+      if (slice !== 'mir' && slice !== 'pora' && slice !== 'para' && slice !== 'obraz' && ffWords.has(slice)) {
         return true;
       }
     }
@@ -215,8 +219,7 @@ function generateOutput(input, words, ffWords) {
       return <span style={{color: 'purple'}}>{word}</span>;
     }
     // Check if the word is in the set
-    else if (isWordInSet(word.toLowerCase(), words)) {
-      // If the word is in the set, return it wrapped in a span with inline CSS for green color
+    else if (word.toLowerCase() !== 'pa' && isWordInSet(word.toLowerCase(), words)) {      // If the word is in the set, return it wrapped in a span with inline CSS for green color
       return <span id="txt" style={{color: 'green'}}>{word}</span>;
         }    // If the word is not in the set, return it wrapped in a span with inline CSS for red color
     else {
