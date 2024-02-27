@@ -76,6 +76,11 @@ function saveToPdf() {
 }
 
 function isWordInSet(word, words) {
+  // Check if the word itself is in the set
+  if (words.has(word)) {
+    return true;
+  }
+
   // Check if removing a 'j' from the word results in a word that's in the set
   for (let i = 0; i < word.length; i++) {
     if (word[i] === 'j') {
@@ -96,9 +101,36 @@ function isWordInSet(word, words) {
     }
   }
 
-  // If no version of the word without 'j' or with 'je' is in the set, check if the word itself is in the set
-  if (words.has(word)) {
+  // Check if removing the last character from the word results in a word that's in the set
+  const wordWithoutLastChar = word.slice(0, -1);
+  if (words.has(wordWithoutLastChar)) {
     return true;
+  }
+
+  // Check if replacing the last character with 'a', 'e', 'i', 'o', or 'u' results in a word that's in the set
+  const vowels = ['a', 'e', 'i', 'o', 'u','j'];
+  for (let i = 0; i < vowels.length; i++) {
+    const wordWithVowel = word.slice(0, -1) + vowels[i];
+    if (words.has(wordWithVowel)) {
+      return true;
+    }
+  }
+
+  // Check if removing 'j' from the end of the word results in a word that's in the set
+  if (word[word.length - 1] === 'j') {
+    const wordWithoutLastJ = word.slice(0, -1);
+    if (isWordInSet(wordWithoutLastJ, words)) {
+      return true;
+    }
+  }
+
+  // Check if the word without punctuation is in the set
+  const punctuation = [':', ',', '!', ';', '?'];
+  if (punctuation.includes(word[word.length - 1])) {
+    const wordWithoutPunctuation = word.slice(0, -1);
+    if (words.has(wordWithoutPunctuation)) {
+      return true;
+    }
   }
 
   return false;
