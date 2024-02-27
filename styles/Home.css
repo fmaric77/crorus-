@@ -128,3 +128,21 @@ body.dark #lp {
   background-color: #444;
   color: #f4f4f4;
 }
+
+body.dark #txt{
+  color: lightgreen !important;
+}
+
+/* Default styles (for light mode) */
+body {
+  background-color: white;
+  color: black;
+}
+
+/* Styles for dark mode */
+@media (prefers-color-scheme: light) {
+  body {
+    background-color: white;
+    color: green;
+  }
+}

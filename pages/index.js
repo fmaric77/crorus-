@@ -48,8 +48,8 @@ export default function Home() {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     localStorage.setItem('theme', newTheme);
     setTheme(newTheme);
+  
   };
-
 function saveToPdf() {
   const outputElement = document.getElementById('output'); // Get the output element
 
@@ -142,6 +142,16 @@ function isWordInSet(word, words) {
     }
   }
 
+  const vowelsadd = ['a', 'e', 'i', 'o', 'u', 'j'];
+for (let i = 0; i < vowelsadd.length; i++) {
+  const wordWithVowel = word + vowelsadd[i];
+  const latinWordWithVowel = latinWord + vowelsadd[i];
+  if (words.has(wordWithVowel) || words.has(latinWordWithVowel)) {
+    return true;
+  }
+}
+
+
   // Check if removing 'j' from the end of the word or its transliteration results in a word that's in the set
   if (word[word.length - 1] === 'j' || latinWord[latinWord.length - 1] === 'j') {
     const wordWithoutLastJ = word.slice(0, -1);
@@ -207,8 +217,8 @@ function generateOutput(input, words, ffWords) {
     // Check if the word is in the set
     else if (isWordInSet(word.toLowerCase(), words)) {
       // If the word is in the set, return it wrapped in a span with inline CSS for green color
-      return <span style={{color: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'lightgreen' : 'green'}}>{word}</span>;    }
-    // If the word is not in the set, return it wrapped in a span with inline CSS for red color
+      return <span id="txt" style={{color: 'green'}}>{word}</span>;
+        }    // If the word is not in the set, return it wrapped in a span with inline CSS for red color
     else {
       return <span style={{color: 'red'}}>{word}</span>;
     }
