@@ -1,56 +1,79 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    padding: 20px;
-    color: #333;
-  }
-  
-  button {
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin: 10px 2px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  textarea {
-    width: 100%;
-    min-height: 150px;
-    padding: 10px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    font-size: 16px;
-  }
-  
-  #word-checker-output {
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-  }
-  
-  #intelligibility {
-    margin-top: 20px;
-    font-size: 20px;
-    font-weight: bold;
-  }
-  
-  span {
-    font-size: 18px;
-  }
-  
-  span[style="color: green"] {
-    color: #008000;
-  }
-  
-  span[style="color: red"] {
-    color: #FF0000;
-  }
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  padding: 20px;
+  color: #333;
+  line-height: 1.6;
+}
+
+button {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px 2px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+textarea {
+  width: 100%;
+  min-height: 150px;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  resize: vertical;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1); /* Added subtle shadow for depth */
+}
+
+#word-checker-output {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
+
+#intelligibility {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #007BFF; /* Changed color to match button */
+}
+
+span {
+  font-size: 18px;
+  display: inline-block;
+  margin: 0 2px;
+  padding: 2px; /* Added padding for better visual separation */
+}
+
+span[style="color: green"] {
+  color: #008000;
+  background-color: #e6ffe6; /* Added background color for better visibility */
+}
+
+span[style="color: red"] {
+  color: #FF0000;
+  background-color: #ffe6e6; /* Added background color for better visibility */
+}
+
+#lp {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: purple;
+  margin: 10px;
+  font-size: 18px; /* Increased font size for better visibility */
+  background-color: #f4f4f4; /* Added background color to stand out */
+  padding: 5px; /* Added padding for better visual separation */
+  border-radius: 5px; /* Added border radius for rounded corners */
+}

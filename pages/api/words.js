@@ -13,3 +13,4 @@ export default function handler(req, res) {
   const data = JSON.parse(fileContents);
   res.status(200).json(data);
 }
+
