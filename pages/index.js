@@ -10,7 +10,6 @@ export default function Home() {
   const [theme, setTheme] = useState('light'); // initially set to 'light'
   const output = useMemo(() => generateOutput(input, words, ffWords, restricted), [input, words, ffWords,restricted]);
   const intelligibility = useMemo(() => calculateIntelligibility(input, words, ffWords,restricted), [input, words, ffWords,restricted]);
-  const isWordInSet = require('./wordCheck');
 
   // Fetch the words from the server
   useEffect(() => {  
