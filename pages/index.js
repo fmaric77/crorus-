@@ -5,10 +5,12 @@ import html2canvas from "html2canvas";
 export default function Home() {
   const [words, setWords] = useState(new Set());
   const [ffWords, setFfWords] = useState(new Set());
+  const [restricted, setRestrictedWords] = useState(new Set());
   const [input, setInput] = useState('');
   const [theme, setTheme] = useState('light'); // initially set to 'light'
-  const output = useMemo(() => generateOutput(input, words, ffWords), [input, words, ffWords]);
-  const intelligibility = useMemo(() => calculateIntelligibility(input, words, ffWords), [input, words, ffWords]);
+  const output = useMemo(() => generateOutput(input, words, ffWords, restricted), [input, words, ffWords,restricted]);
+  const intelligibility = useMemo(() => calculateIntelligibility(input, words, ffWords,restricted), [input, words, ffWords,restricted]);
+  const isWordInSet = require('./wordCheck');
 
   // Fetch the words from the server
   useEffect(() => {  
@@ -37,6 +39,20 @@ export default function Home() {
       .catch(function (error) {
         console.log(error);
       });
+
+       // Fetch the ff words
+    axios.get('/api/restricted')
+    .then(function (response) {
+      // Add each word to the set
+      const restrictedWordsSet = new Set(response.data);
+      setRestrictedWords(RestrictedWordsSet);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+
+
   }, [theme]);
 
   // Handle input change
@@ -222,9 +238,10 @@ function isWordInFfSet(word, ffWords) {
   return false;
 }
 
-function generateOutput(input, words, ffWords) {
+function generateOutput(input, words, ffWords ,restricted) {
   // Split the input into words and spaces
   const inputWords = input.split(/(\s+)/);
+  const exceptions = require('../public/restricted.json');// Replace with your actual exceptions
 
   // Generate the output HTML
   const outputHtml = inputWords.map(word => {
@@ -237,17 +254,28 @@ function generateOutput(input, words, ffWords) {
       // If the word is in the ff words set, return it wrapped in a span with inline CSS for purple color
       return <span style={{color: 'purple'}}>{word}</span>;
     }
+
+     // Check if the word is in the restricted set words set
+     else if (isWordInFfSet(word.toLowerCase(), restricted)) {
+      // If the word is in the ff words set, return it wrapped in a span with inline CSS for purple color
+      return <span style={{color: 'brown'}}>{word}</span>;
+    }
     // Check if the word is in the set
-    else if (word.toLowerCase() !== 'pa' && isWordInSet(word.toLowerCase(), words)) {      // If the word is in the set, return it wrapped in a span with inline CSS for green color
+    else if (word.toLowerCase() !== 'pa' && isWordInSet(word.toLowerCase(), words) && !exceptions.includes(word.toLowerCase())) {
+      // If the word is in the set and not in the exceptions, return it wrapped in a span with inline CSS for green color
       return <span id="txt" style={{color: 'green'}}>{word}</span>;
-        }    // If the word is not in the set, return it wrapped in a span with inline CSS for red color
-    else {
+    } else {
+      // If the word is not in the set or it's in the exceptions, return it wrapped in a span with inline CSS for red color
       return <span style={{color: 'red'}}>{word}</span>;
     }
+
   });
 
   return outputHtml;
 }
+
+// Import the restricted list
+const restrictedList = require('../public/restricted.json');
 
 function calculateIntelligibility(input, words, ffWords) {
   // Split the input into words and spaces
@@ -263,9 +291,9 @@ function calculateIntelligibility(input, words, ffWords) {
       // Increment the total words count
       totalWordsCount++;
 
-      // Check if the word is in the ff words set
-      if (isWordInFfSet(word.toLowerCase(), ffWords)) {
-        // If the word is in the ff words set, do not count it as a match
+      // Check if the word is in the ff words set or in the restricted list
+      if (isWordInFfSet(word.toLowerCase(), ffWords) || restrictedList.includes(word.toLowerCase())) {
+        // If the word is in the ff words set or in the restricted list, do not count it as a match
         return;
       }
 
