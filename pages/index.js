@@ -41,15 +41,6 @@ export default function Home() {
       });
 
        // Fetch the ff words
-    axios.get('/api/restricted')
-    .then(function (response) {
-      // Add each word to the set
-      const restrictedWordsSet = new Set(response.data);
-      setRestrictedWords(RestrictedWordsSet);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
 
 
 
